@@ -1,3 +1,8 @@
+# backup files and other stuff the editor may create
+*~
+*.swp
+*.bak
+
 # Prerequisites
 *.d
 
