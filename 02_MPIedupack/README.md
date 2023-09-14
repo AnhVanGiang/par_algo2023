@@ -12,7 +12,8 @@ tar xf MPIedupack1.0.tar
 
 On Snellius, load the OpenMPI module like this:
 ```bash
-module load 2023 OpenMPI/4.1.5-GCC-12.3.0
+module load 2022 OpenMPI/4.1.4-GCC-11.3.0
+
 ```
 (if you put this line into your ${HOME}/.bashrc file, it will be automatically loaded in the future).
 
