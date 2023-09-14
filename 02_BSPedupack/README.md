@@ -4,6 +4,10 @@ If you prefer to stay close to the book and use BSPlib, you first need to instal
 We recommend the [MultiCore BSP for C](http://www.multicorebsp.com/) implementation, which is suitable for
 one node of Snellius (128 cores).
 
+**Caveat:** On Snellius, only the Multi-Core implementation works reliably, and only if you
+request a full node (128 cores). In order not to waste too many resources, please develop
+your programs on another platform (e.g. your laptop) or run very short/small tests on the login node.
+
 ## Getting and compiling the BSPlib
 
 - Download the source code on Snellius (or in your own linux shell): 

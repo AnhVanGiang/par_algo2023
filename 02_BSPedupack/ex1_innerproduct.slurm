@@ -1,6 +1,13 @@
 #!/bin/bash
-#SBATCH --ntasks=4
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
 ##SBATCH -t 00:01:00
 
-# runs the inner product (ip) example using 4 processes
-./BSPedupack/ip
+# BSPedupack programs read arguments from stdin, so we have to "pipe them in"
+# number of processor cores to use
+echo 4 > input.tmp
+# vector length
+echo 1000000 >> input.tmp
+
+# runs the inner product (inprod) example using 4 processes
+./BSPedupack2.0/inprod < "input.tmp"
