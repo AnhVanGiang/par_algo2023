@@ -35,6 +35,7 @@
 *.dylib
 
 # Executables
+*.x
 *.exe
 *.out
 *.app
