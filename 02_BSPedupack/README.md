@@ -1,4 +1,4 @@
-# Examples from the book using MPI
+# Examples from the book using BSPlib
 
 If you prefer to stay close to the book and use BSPlib, you first need to install a version of the library.
 We recommend the [MultiCore BSP for C](http://www.multicorebsp.com/) implementation, which is suitable for
