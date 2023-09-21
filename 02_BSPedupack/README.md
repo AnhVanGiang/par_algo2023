@@ -39,3 +39,28 @@ it is a good idea to install the edupack to get started.
 wget https://webspace.science.uu.nl/~bisse101/Book2/BSPedupack2.0.tar.gz
 tar xzvf BSPedupack2.0.tar.gz
 ```
+
+## Running an example on Snellius
+
+To compile, again go to the unpacked directory and type ``make``.
+The job script ``ex1_innerproduct.slurm`` is ready to be submitted after you compiled the BSPedupack.
+To do so, use
+```bash
+$ sbatch ex1_innerproduct.slurm
+```
+You can check the job status with the command ``squeue``.
+Once finished, the job no longer appears in ``squeue``, and 
+the output will be in a file called ``slurm-<jobid>.out``.
+
+**Note**: if you look in the job script, it requests 128 "cpus-per-task". This is a full node,
+whereas only 4 cores are actually used by the program (as read from the input file). 
+This is for technical reasons on Snellius. If you have a program that you want to test
+for different numbers of cores, you can run them one after the other in the same job script.
+For testing and developing, just run the program on the login node (using ``./bspinprod <``.
+This also allows you to specify p and n interactively.
+
+**Note**: The bsprun command is not required to start your program. On Snellius, always use ``srun`` to run on compute
+nodes, or no prefix to run on the login node.
+
+**Guideline**: anything up to 8 cores and less than a minute of runtime should be OK for the login nodes, or develop
+your code on your laptop and go to Snellius only for benchmarks.
