@@ -66,9 +66,13 @@ double my_bspip(long n, double *x, double *y)
     long p= bsp_nprocs(); // p = number of processors obtained
     long s= bsp_pid();    // s = processor number
 
-    double alpha= 0.0;
+    double inprod= 0.0;
+    for (long i=0; i<nloc(p,s,n); i++)
+        inprod += x[i]*y[i];
 
-    /* your code goes here! */
+    double alpha=-1.0;
+
+    /* ... YOUR CODE GOES HERE ... */
 
     return alpha;
 } /* end my_bspip */

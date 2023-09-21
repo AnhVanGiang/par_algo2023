@@ -8,8 +8,26 @@ all local results to the final sum.
 We provide two working programs (``mpi_inprod.c`` and ``bsp_inprod.c``),
 choose whichever programming model you prefer.
 
-Read the programs to undersstand their structure,
+1. Read the programs to undersstand their structure,
 and then add your own code in locations marked by ``/* ... YOUR CODE ...*/``.
+Any variant that produces correct results on all processors is OK.
+
+2. Challenge: try to implement the so-called "butterfly reduction" algorithm:
+```bash
+        P0  P1  P2  P3
+          \/  \/  \/
+          /\  /\  /\
+        P0  P1  P2  P3
+          \____/
+          /    \        (and similar for P1<->P3)
+        P0  P1  P2  P3
+```
+Hints:
+
+  - You may assume that the number of processes P is a power of 2.
+  - The number of reduction steps (levels) is then ``log2(P)``
+    
+# Practical steps to compile and run the code
 
 On Snellius, don't forget to oad the MPI module:
 ```bash
