@@ -2,7 +2,7 @@
 BSPCC=/home/jonas/src/MulticoreBSP-for-C/tools/bspcc
 
 
-all: p01.x p02.x p03.x p04.x p05.x p06.x p07.x  p_jonas.x
+all: p01.x p02.x p03.x p04.x p05.x p06.x p07.x p08.x p_jonas.x
 
 %.x: %.c
 	gcc -O3 -o $@ $< -lm
