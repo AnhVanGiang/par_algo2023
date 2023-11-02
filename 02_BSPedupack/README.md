@@ -26,7 +26,7 @@ $ make
 
 To make the compiler command ``bspcc`` available in your terminal, type
 ```bash
-export PATH=${HOME}/MultiCoreBSP-for-C/tools/:${PATH}
+export PATH=${HOME}/MulticoreBSP-for-C/tools/:${PATH}
 ```
 Add this line to the file ``~/.bashrc`` to make it available automatically after every login.
 
