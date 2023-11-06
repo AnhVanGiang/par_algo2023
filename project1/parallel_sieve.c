@@ -1,10 +1,11 @@
 #include "bspedupack.h"
 #include <math.h>
+#include <stdio.h>
 
 static long P; // number of processors requested
 static long N; // global vector length
 double *primes;
-long current_k;
+long current_k = 2;
 
 long first_multiple(long start, long end, long k) {
     if (start <= k) {
@@ -44,7 +45,7 @@ void parallel_sieve(long start_ind, long end_ind) {
 
 
     if (s == 0) {
-        for (int j = current_k - 1; j < sqrt(N); j ++) {
+        for (int j = current_k - 1; j < sqrt(N) + 1; j ++) {
             if (primes[j] == 1) {
                 current_k = j + 2;
                 // printf("Processor %lu has updated current_k to %lu \n", s, current_k);
@@ -52,7 +53,6 @@ void parallel_sieve(long start_ind, long end_ind) {
             }
         }
     }
-
 }
 
 long start_ind(long p, long s, long n) {
@@ -95,12 +95,17 @@ void bsp_sieve() {
     // Ensure the end index doesn't exceed n
     end_index = (end_index > n) ? n : end_index;
 
+    double time0= bsp_time();
+
     bsp_sync();
 
-    current_k = 2;
+    long last_k = 1;
 
-    while (current_k * current_k <= n) {
+    while (current_k != last_k) {
         // printf("Current k is %lu \n", current_k);
+        // printf("Last k is %lu \n", last_k);
+
+        last_k = current_k;
         parallel_sieve(start_index, end_index);
 
         bsp_sync();
@@ -108,15 +113,28 @@ void bsp_sieve() {
         // printf("%f \n", primes[2]);
     }
 
+
     bsp_sync();
 
+    double time1= bsp_time();
+
+    // FILE *fp;
+    // fp = fopen("./output.txt", "w");
+
+    // if (fp == NULL) {
+    //     perror("Error opening file");
+    // }
+
     if (s == 0) {
+        printf("Time taken: %f \n", (time1 - time0)/100.0);
         for (long t = 0; t < n - 2; t++) {
             // printf("a %lu ", t);
             if (primes[t] == 1) {
-                printf("%lu \n", t + 2);
+                printf("%lu ", t + 2);
             }
         }
+
+        // fclose(fp);
     }
 
     bsp_end();
