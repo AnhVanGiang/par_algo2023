@@ -74,6 +74,8 @@ double my_bspip(long n, double *x, double *y)
 
     /* ... YOUR CODE GOES HERE ... */
 
+    
+
     return alpha;
 } /* end my_bspip */
 

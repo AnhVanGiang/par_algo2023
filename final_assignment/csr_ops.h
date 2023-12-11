@@ -3,8 +3,8 @@
 
 #include "graph.h"
 
-void createDiagFromCSR(CSRGraph graph, long N, long *D);
-CSRGraph generateCSRGraph(int N);
+void createDiagFromCSR(CSRGraph graph, long N, double *D);
+CSRGraph generateCSRGraph(long N, double p);
 void CSRToColumnStocMatrix(CSRGraph graph, long N, long **M);
 CSRGraph generateSampleCSRGraph();
 long getCSRIndex(long i, long j, long N, CSRGraph graph);

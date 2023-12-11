@@ -1,8 +1,8 @@
 CC=bspcc
 CFLAGS=-I. -O3 -march=native
 
-DEPS = graph.h math_ops.h matrix_vector_ops.h csr_ops.h utilities.h bspedupack.h
-OBJ = main.o math_ops.o matrix_vector_ops.o csr_ops.o utilities.o bspedupack.o
+DEPS = graph.h sequential_pr.h math_ops.h matrix_vector_ops.h csr_ops.h utilities.h bspedupack.h
+OBJ = main.o math_ops.o matrix_vector_ops.o csr_ops.o utilities.o sequential_pr.o bspedupack.o
 
 # Add rule to compile bspedupack.c
 bspedupack.o: bspedupack.c bspedupack.h

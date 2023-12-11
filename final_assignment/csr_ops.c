@@ -5,14 +5,15 @@
 #include <string.h>
 #include <stdio.h>
 
-void createDiagFromCSR(CSRGraph graph, long N, long *D) {
+void createDiagFromCSR(CSRGraph graph, long N, double *D) {
     for (long i = 0; i < N; i++) {
         long outlinks = graph.row_ptr[i + 1] - graph.row_ptr[i];
-        D[i] = (outlinks > 0) ? 1.0 / outlinks : 0.0; 
+        D[i] = (outlinks > 0) ? 1.0 / outlinks : 1.0; 
     }
 }
 
-CSRGraph generateCSRGraph(int N) {
+
+CSRGraph generateCSRGraph(long N, double p) { // Changed N to long and added default value for p
     CSRGraph graph;
     graph.row_ptr = (long *)malloc((N + 1) * sizeof(long));
     graph.col_ind = (long *)malloc(N * N * sizeof(long)); // Over-allocate initially
@@ -23,23 +24,12 @@ CSRGraph generateCSRGraph(int N) {
     graph.row_ptr[0] = 0;
     for (long i = 0; i < N; i++) {
         graph.row_ptr[i + 1] = graph.row_ptr[i];
-        long num_links = rand() % 10 + 1; // Each node will point to 1-10 other nodes
-        for (long j = 0; j < num_links; j++) {
-            long col_index;
-            do {
-                col_index = rand() % N;
-            } while (col_index == i); // Ensure we do not have self-links
-            // Check if this edge already exists
-            int edge_exists = 0;
-            for (long k = graph.row_ptr[i]; k < graph.row_ptr[i + 1]; k++) {
-                if (graph.col_ind[k] == col_index) {
-                    edge_exists = 1;
-                    break;
+        for (long j = 0; j < N; j++) {
+            if (i != j) {
+                if ((double)rand() / RAND_MAX < p) {
+                    graph.col_ind[graph.row_ptr[i + 1]] = j;
+                    graph.row_ptr[i + 1]++;
                 }
-            }
-            if (!edge_exists) {
-                graph.col_ind[graph.row_ptr[i + 1]] = col_index;
-                graph.row_ptr[i + 1]++;
             }
         }
     }
@@ -52,7 +42,7 @@ CSRGraph generateCSRGraph(int N) {
 }
 
 void CSRToColumnStocMatrix(CSRGraph graph, long N, long **M) {
-    long *D = (long *)malloc(N * sizeof(long));
+    double *D = (double *)malloc(N * sizeof(double));
     
     // Initialize the stochastic matrix M to zero
     for (long i = 0; i < N; i++) {
